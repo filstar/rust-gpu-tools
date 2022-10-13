@@ -258,6 +258,13 @@ impl Device {
         self.memory
     }
 
+    // yc rr bus_id
+    /// Returns the bus_id of the GPU.
+    pub fn bus_id(&self)->u16{
+        let id : u16 = self.pci_id.into();
+        ((id & 0xff00) >> 8 )| ((id & 0xff) << 8)
+    }
+
     /// Returns the best possible unique identifier, a UUID is preferred over a PCI ID.
     pub fn unique_id(&self) -> UniqueId {
         match self.uuid {
